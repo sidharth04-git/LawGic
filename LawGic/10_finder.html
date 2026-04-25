@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawyer Finder | LawGic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: #1a3a5f;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            margin-right: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 2.2rem;
+        }
+        
+        .lawyer-finder-container {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .case-input-section {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .case-input-section h2 {
+            color: #1a3a5f;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+            padding-right: 45px;
+        }
+        
+        .voice-input-btn {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            background: #f0f7ff;
+            border: 1px solid #1a3a5f;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #1a3a5f;
+            transition: all 0.3s;
+        }
+        
+        .voice-input-btn:hover {
+            background: #1a3a5f;
+            color: white;
+        }
+        
+        .voice-input-btn.listening {
+            background: #ff5252;
+            color: white;
+            border-color: #ff5252;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .voice-status {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+            min-height: 20px;
+        }
+        
+        .submit-btn {
+            background: #1a3a5f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 14px 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: #143052;
+        }
+        
+        .results-section {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .results-section h2 {
+            color: #1a3a5f;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        .results-placeholder {
+            text-align: center;
+            color: #666;
+            padding: 40px 0;
+        }
+        
+        .results-placeholder i {
+            font-size: 3rem;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+        
+        .lawyer-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .lawyer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .lawyer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .lawyer-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #1a3a5f;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-right: 15px;
+        }
+        
+        .lawyer-info h3 {
+            color: #1a3a5f;
+            margin-bottom: 5px;
+        }
+        
+        .lawyer-specialty {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .lawyer-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .detail-item i {
+            color: #1a3a5f;
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .match-score {
+            background: #f0f7ff;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #1a3a5f;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .lawyer-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .action-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .view-profile {
+            background: #1a3a5f;
+            color: white;
+            border: none;
+        }
+        
+        .view-profile:hover {
+            background: #143052;
+        }
+        
+        .book-consultation {
+            background: white;
+            color: #1a3a5f;
+            border: 1px solid #1a3a5f;
+        }
+        
+        .book-consultation:hover {
+            background: #f0f7ff;
+        }
+        
+        .how-it-works {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .how-it-works h2 {
+            color: #1a3a5f;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .step-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #f0f7ff;
+            color: #1a3a5f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            color: #1a3a5f;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 900px) {
+            .lawyer-finder-container {
+                flex-direction: column;
+            }
+            
+            .lawyer-details {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .lawyer-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .lawyer-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .lawyer-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .action-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-balance-scale"></i>
+            <h1>LawGic Lawyer Finder</h1>
+        </div>
+        <p>Find the perfect legal expert for your specific needs</p>
+    </header>
+    
+    <div class="container">
+        <div class="lawyer-finder-container">
+            <div class="case-input-section">
+                <h2>Describe Your Case</h2>
+                <form id="caseForm">
+                    <div class="form-group">
+                        <label for="caseType">Case Type</label>
+                        <select id="caseType" required>
+                            <option value="">Select a case type</option>
+                            <option value="constitutional">Constitutional Law</option>
+                            <option value="criminal">Criminal Defense</option>
+                            <option value="corporate">Corporate Law</option>
+                            <option value="civil">Civil Rights</option>
+                            <option value="intellectual">Intellectual Property</option>
+                            <option value="tax">Tax Law</option>
+                            <option value="environmental">Environmental Law</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="caseDescription">Case Description</label>
+                        <textarea id="caseDescription" placeholder="Please describe your legal issue in detail..." required></textarea>
+                        <button type="button" class="voice-input-btn" id="voiceInputBtn" title="Voice Input">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <div class="voice-status" id="voiceStatus"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budget">Budget Range</label>
+                        <select id="budget">
+                            <option value="">Select budget range</option>
+                            <option value="low">Under ₹50,000</option>
+                            <option value="medium">₹50,000 - ₹2,00,000</option>
+                            <option value="high">₹2,00,000 - ₹5,00,000</option>
+                            <option value="premium">Over ₹5,00,000</option>
+                            <option value="notsure">Not sure</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">Preferred Location</label>
+                        <input type="text" id="location" placeholder="City or State">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="experience">Desired Experience Level</label>
+                        <select id="experience">
+                            <option value="">Any experience level</option>
+                            <option value="junior">Junior (1-5 years)</option>
+                            <option value="mid">Mid-level (5-15 years)</option>
+                            <option value="senior">Senior (15-25 years)</option>
+                            <option value="expert">Expert (25+ years)</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Find Matching Lawyers</button>
+                </form>
+            </div>
+            
+            <div class="results-section">
+                <h2>Matching Lawyers</h2>
+                <div id="resultsContainer">
+                    <div class="results-placeholder">
+                        <i class="fas fa-search"></i>
+                        <p>Enter your case details to find matching lawyers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="how-it-works">
+            <h2>How Lawyer Finder Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Describe Your Case</h3>
+                    <p>Provide details about your legal issue, budget, and preferences</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>AI-Powered Matching</h3>
+                    <p>Our algorithm matches you with lawyers specializing in your specific needs</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Review Profiles</h3>
+                    <p>Evaluate lawyer profiles, experience, and client reviews</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Connect & Consult</h3>
+                    <p>Schedule a consultation with your chosen lawyer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 LawGic. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Array of famous Indian lawyers with their details
+        const famousIndianLawyers = [
+            {
+                id: 1,
+                name: "Fali S. Nariman",
+                specialty: "Constitutional Law",
+                experience: "68 years",
+                cases: "1000+",
+                rating: "5.0",
+                price: "₹15,00,000+",
+                match: "98%",
+                avatar: "FN",
+                website: "https://www.supremecourt.gov.in/"
+            },
+            {
+                id: 2,
+                name: "Ram Jethmalani",
+                specialty: "Criminal Defense",
+                experience: "70 years",
+                cases: "2000+",
+                rating: "4.9",
+                price: "₹10,00,000+",
+                match: "97%",
+                avatar: "RJ",
+                website: "https://www.jethmalanilaw.com/"
+            },
+            {
+                id: 3,
+                name: "Harish Salve",
+                specialty: "Constitutional Law",
+                experience: "40 years",
+                cases: "500+",
+                rating: "4.9",
+                price: "₹12,00,000+",
+                match: "96%",
+                avatar: "HS",
+                website: "https://www.blackstonechambers.com/"
+            },
+            {
+                id: 4,
+                name: "Mukul Rohatgi",
+                specialty: "Constitutional Law",
+                experience: "42 years",
+                cases: "600+",
+                rating: "4.8",
+                price: "₹10,00,000+",
+                match: "95%",
+                avatar: "MR",
+                website: "https://www.agslegals.com/"
+            },
+            {
+                id: 5,
+                name: "Abhishek Manu Singhvi",
+                specialty: "Corporate Law",
+                experience: "35 years",
+                cases: "400+",
+                rating: "4.8",
+                price: "₹8,00,000+",
+                match: "94%",
+                avatar: "AMS",
+                website: "https://www.drsinghvi.com/"
+            }
+        ];
+
+        // Voice recognition functionality
+        const voiceInputBtn = document.getElementById('voiceInputBtn');
+        const voiceStatus = document.getElementById('voiceStatus');
+        const caseDescription = document.getElementById('caseDescription');
+        
+        // Check if the browser supports speech recognition
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        
+        if (SpeechRecognition) {
+            const recognition = new SpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'en-IN'; // Indian English
+            
+            let isListening = false;
+            
+            voiceInputBtn.addEventListener('click', () => {
+                if (isListening) {
+                    recognition.stop();
+                    voiceInputBtn.classList.remove('listening');
+                    voiceStatus.textContent = '';
+                    isListening = false;
+                } else {
+                    recognition.start();
+                    voiceInputBtn.classList.add('listening');
+                    voiceStatus.textContent = 'Listening... Speak now';
+                    isListening = true;
+                }
+            });
+            
+            recognition.onresult = (event) => {
+                const transcript = Array.from(event.results)
+                    .map(result => result[0])
+                    .map(result => result.transcript)
+                    .join('');
+                
+                caseDescription.value = transcript;
+            };
+            
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error', event.error);
+                voiceStatus.textContent = `Error: ${event.error}`;
+                voiceInputBtn.classList.remove('listening');
+                isListening = false;
+                
+                // Provide helpful instructions based on error
+                if (event.error === 'not-allowed') {
+                    voiceStatus.textContent = 'Microphone access is blocked. Please allow microphone access in your browser settings.';
+                }
+            };
+            
+            recognition.onend = () => {
+                voiceInputBtn.classList.remove('listening');
+                voiceStatus.textContent = 'Voice input stopped';
+                isListening = false;
+            };
+        } else {
+            // Browser doesn't support speech recognition
+            voiceInputBtn.style.display = 'none';
+            voiceStatus.textContent = 'Voice input is not supported in your browser. Try Chrome or Edge.';
+        }
+
+        document.getElementById('caseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const caseType = document.getElementById('caseType').value;
+            const budget = document.getElementById('budget').value;
+            
+            // Find matching lawyers based on input
+            findMatchingLawyers(caseType, budget);
+        });
+        
+        function findMatchingLawyers(caseType, budget) {
+            // Filter lawyers based on case type
+            let filteredLawyers = famousIndianLawyers;
+            
+            if (caseType) {
+                filteredLawyers = famousIndianLawyers.filter(lawyer => {
+                    // Simple matching logic
+                    const specialty = lawyer.specialty.toLowerCase();
+                    if (caseType === "constitutional" && specialty.includes("constitutional")) return true;
+                    if (caseType === "criminal" && specialty.includes("criminal")) return true;
+                    if (caseType === "corporate" && specialty.includes("corporate")) return true;
+                    if (caseType === "civil" && specialty.includes("civil")) return true;
+                    if (caseType === "intellectual" && specialty.includes("intellectual")) return true;
+                    if (caseType === "tax" && specialty.includes("tax")) return true;
+                    if (caseType === "environmental" && specialty.includes("environmental")) return true;
+                    return caseType === "other";
+                });
+            }
+            
+            // Further filter by budget if specified
+            if (budget) {
+                filteredLawyers = filteredLawyers.filter(lawyer => {
+                    // Simple budget matching
+                    if (budget === "low") return lawyer.price.includes("₹5,00,000") || lawyer.price.includes("₹6,00,000");
+                    if (budget === "medium") return lawyer.price.includes("₹7,00,000") || lawyer.price.includes("₹8,00,000");
+                    if (budget === "high") return lawyer.price.includes("₹9,00,000") || lawyer.price.includes("₹10,00,000");
+                    if (budget === "premium") return lawyer.price.includes("₹11,00,000") || lawyer.price.includes("₹12,00,000") || 
+                                                 lawyer.price.includes("₹15,00,000");
+                    return true; // For "notsure"
+                });
+            }
+            
+            // Display results
+            displayResults(filteredLawyers);
+        }
+        
+        function displayResults(lawyers) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            
+            if (lawyers.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="results-placeholder">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>No lawyers found matching your criteria. Try adjusting your search parameters.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let resultsHTML = '';
+            
+            lawyers.forEach(lawyer => {
+                resultsHTML += `
+                    <div class="lawyer-card">
+                        <div class="match-score">${lawyer.match} Match</div>
+                        <div class="lawyer-header">
+                            <div class="lawyer-avatar">${lawyer.avatar}</div>
+                            <div class="lawyer-info">
+                                <h3>${lawyer.name}</h3>
+                                <p class="lawyer-specialty">${lawyer.specialty}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="lawyer-details">
+                            <div class="detail-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span>${lawyer.experience} experience</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-gavel"></i>
+                                <span>${lawyer.cases} cases</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-star"></i>
+                                <span>${lawyer.rating} rating</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-rupee-sign"></i>
+                                <span>${lawyer.price}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="lawyer-actions">
+                            <a href="${lawyer.website}" target="_blank" class="action-btn view-profile">View Profile</a>
+                            <button class="action-btn book-consultation">Book Consultation</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resultsContainer.innerHTML = resultsHTML;
+            
+            // Add event listeners to the buttons
+            document.querySelectorAll('.book-consultation').forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('In a real application, this would redirect to the appointment booking page.');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

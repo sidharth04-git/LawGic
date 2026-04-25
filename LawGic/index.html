@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LawGic - AI Legal Help</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+  <!-- Dark Mode Toggle -->
+  <button id="darkModeToggle" class="dark-toggle" title="Toggle Dark Mode">🌓</button>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo"><i class="fas fa-balance-scale"></i> LawGic</div>
+    <nav class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#ai-chatbot">AI Chatbot</a>
+      <a href="#case-tracking">Case Tracking</a>
+      <a href="#blogs">Legal Blogs</a>
+      <a href="#connect">Connect</a>
+      <a href="#ngo">NGOs</a>
+    </nav>
+    <div class="actions">
+      <button class="btn" id="loginBtn">Login</button>
+      <button class="btn primary" id="signupBtn">Sign Up</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>AI-Powered Legal Help</h1>
+      <p>Understand your rights. Get connected to professionals. Track your case. All in one place.</p>
+      <div class="hero-buttons">
+        <button class="btn accent">Try AI Assistant</button>
+        <button class="btn outline">Learn More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section" id="features">
+    <h2>Key Features</h2>
+    <div class="grid">
+      <div class="card"><i class="fas fa-robot"></i><h3>Legal Chatbot</h3><p>Instant legal advice with AI.</p></div>
+      <div class="card"><i class="fas fa-file-alt"></i><h3>Document Reader</h3><p>Understand legal jargon.</p></div>
+      <div class="card"><i class="fas fa-user-tie"></i><h3>Connect to Lawyer</h3><p>Get expert help nearby.</p></div>
+      <div class="card"><i class="fas fa-chart-line"></i><h3>Track Case</h3><p>Live case updates.</p></div>
+    </div>
+  </section>
+
+  <!-- Chatbot Section -->
+  <section class="section" id="ai-chatbot">
+    <h2>AI Chatbot</h2>
+    <p>Ask legal questions in your language. Available 24x7.</p>
+    <select id="langSelect">
+      <option value="en">English</option>
+      <option value="hi">Hindi</option>
+      <option value="bn">Bengali</option>
+      <option value="ta">Tamil</option>
+      <option value="te">Telugu</option>
+    </select>
+    <div class="chatbot">
+      <div class="chat-log" id="chatLog">
+        <div class="bot">Hello! I'm your AI legal assistant. How can I help?</div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Ask your legal question..."/>
+        <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        <button id="voiceInput" title="Voice Input"><i class="fas fa-microphone"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Tracking Section -->
+  <section class="section" id="case-tracking">
+    <h2>Case Tracking Dashboard</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Case #12345</h3>
+        <p>Status: Pending</p>
+        <p>Next Hearing: 12 Aug 2025</p>
+        <button class="btn outline">View Details</button>
+      </div>
+      <div class="card">
+        <h3>Case #67890</h3>
+        <p>Status: In Court</p>
+        <p>Next Hearing: 25 Sep 2025</p>
+        <button class="btn outline">View Details</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Document Summarizer Section -->
+  <section class="section" id="doc-summary">
+    <h2>Document Summarizer</h2>
+    <p>Upload a legal document to get a simple explanation.</p>
+    <select>
+      <option>Choose Language</option>
+      <option>English</option>
+      <option>Hindi</option>
+      <option>Marathi</option>
+      <option>Bengali</option>
+    </select>
+    <textarea rows="6" placeholder="Paste legal document text here..."></textarea>
+    <div style="margin-top: 1rem;">
+      <button class="btn primary">Summarize</button>
+      <button class="btn outline">Upload PDF</button>
+    </div>
+  </section>
+
+  <!-- Blogs Section -->
+  <section class="section" id="blogs">
+    <h2>Legal Blogs</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Your Rights in Police Encounters</h3>
+        <p>How to stay safe and informed.</p>
+        <a href="#">Read More</a>
+      </div>
+      <div class="card">
+        <h3>Small Claims Guide</h3>
+        <p>Step-by-step help without a lawyer.</p>
+        <a href="#">Read More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connection Section -->
+  <section class="section" id="connect">
+    <h2>Find a Lawyer or NGO</h2>
+    <p>We connect you with verified legal help.</p>
+    <button class="btn accent">Find Now</button>
+  </section>
+
+  <!-- NGO Section -->
+  <section class="section" id="ngo">
+    <h2>NGO Partners</h2>
+    <ul>
+      <li>HRLN - Human Rights Law Network</li>
+      <li>ALF - Alternative Law Forum</li>
+    </ul>
+  </section>
+
+  <!-- Login Modal -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <span class="close" id="closeLogin">&times;</span>
+      <h3>Login</h3>
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Password">
+      <button class="btn primary">Login</button>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div class="modal" id="signupModal">
+    <div class="modal-content">
+      <span class="close" id="closeSignup">&times;</span>
+      <h3>Sign Up</h3>
+      <input type="text" placeholder="Full Name">
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Password">
+      <button class="btn primary">Register</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 LawGic. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

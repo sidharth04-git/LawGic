@@ -1,0 +1,572 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Tracker | LawGic</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    body {
+      background: #f0f2f5;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    nav {
+      background: #fff;
+      padding: 16px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.4em;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #1f3d7a;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #1f3d7a;
+      font-size: 1em;
+      padding: 6px 10px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #007bff;
+    }
+
+    .nav-links a.active {
+      font-weight: 700;
+      border-bottom: 3px solid #007bff;
+      padding-bottom: 4px;
+    }
+
+    .nav-btn {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: #0056b3;
+    }
+
+    .mode-switcher {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #333;
+    }
+
+    select {
+      padding: 8px 12px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background: #fff;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      color: #1f3d7a;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 1.1em;
+    }
+
+    .stats-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 123, 255, 0.2);
+    }
+
+    .stat-card i {
+      font-size: 2em;
+      color: #1f3d7a;
+      margin-bottom: 15px;
+    }
+
+    .stat-value {
+      font-size: 2.2em;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .filters {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .filter-group label {
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .filter-group select, .filter-group input {
+      padding: 10px 12px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      min-width: 150px;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 0 10px;
+      flex-grow: 1;
+      max-width: 300px;
+    }
+
+    .search-box input {
+      border: none;
+      padding: 10px;
+      width: 100%;
+      outline: none;
+      background: transparent;
+      color: #333;
+    }
+
+    .cases-table {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background: #f9f9f9;
+      font-weight: 600;
+      color: #1f3d7a;
+    }
+
+    tr:hover {
+      background: #f9f9f9;
+    }
+
+    .status {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .status-open {
+      background: rgba(0, 123, 255, 0.1);
+      color: #007bff;
+    }
+
+    .status-in-progress {
+      background: rgba(255, 193, 7, 0.1);
+      color: #ffc107;
+    }
+
+    .status-review {
+      background: rgba(40, 167, 69, 0.1);
+      color: #28a745;
+    }
+
+    .status-resolved {
+      background: rgba(23, 162, 184, 0.1);
+      color: #17a2b8;
+    }
+
+    .status-closed {
+      background: rgba(108, 117, 125, 0.1);
+      color: #6c757d;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      color: #1f3d7a;
+      cursor: pointer;
+      font-size: 1.1em;
+      padding: 5px;
+      margin-right: 10px;
+      transition: color 0.2s;
+    }
+
+    .action-btn:hover {
+      color: #007bff;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .pagination button {
+      padding: 8px 15px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #333;
+      transition: all 0.2s;
+    }
+
+    .pagination button:hover {
+      background: #f0f2f5;
+    }
+
+    .pagination button.active {
+      background: #007bff;
+      color: #fff;
+      border-color: #007bff;
+    }
+
+    @media (max-width: 768px) {
+      .filters {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .filter-group {
+        width: 100%;
+      }
+      
+      .search-box {
+        max-width: 100%;
+      }
+      
+      th, td {
+        padding: 12px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">LawGic</div>
+    <div class="nav-links">
+      <a href="#">About us</a>
+      <a href="#">Chatbot</a>
+      <a href="#">Document Interpreter</a>
+      <a href="#" class="active">Case Tracker</a>
+      <a href="#">NGO Partners</a>
+      <a href="#">Blogs</a>
+      <button class="nav-btn"><i class="fas fa-sign-in-alt"></i> <span>Login</span></button>
+      <button class="nav-btn"><i class="fas fa-user-plus"></i> <span>Sign Up</span></button>
+    </div>
+    <div class="mode-switcher">
+      Mode:
+      <select id="mode-select">
+        <option value="user">User Mode</option>
+        <option value="lawyer">Lawyer Mode</option>
+      </select>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="dashboard-header">
+      <div>
+        <h1>Case Tracker</h1>
+        <p class="subtitle">Monitor your legal cases and their progress</p>
+      </div>
+      <button class="nav-btn"><i class="fas fa-plus"></i> <span>New Case</span></button>
+    </div>
+
+    <div class="stats-cards">
+      <div class="stat-card">
+        <i class="fas fa-folder-open"></i>
+        <div class="stat-value">12</div>
+        <div class="stat-label">Total Cases</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-tasks"></i>
+        <div class="stat-value">5</div>
+        <div class="stat-label">In Progress</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-check-circle"></i>
+        <div class="stat-value">3</div>
+        <div class="stat-label">Resolved</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-clock"></i>
+        <div class="stat-value">4</div>
+        <div class="stat-label">Pending Review</div>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="filter-group">
+        <label for="status-filter">Status</label>
+        <select id="status-filter">
+          <option value="all">All Statuses</option>
+          <option value="open">Open</option>
+          <option value="in-progress">In Progress</option>
+          <option value="review">Under Review</option>
+          <option value="resolved">Resolved</option>
+          <option value="closed">Closed</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="type-filter">Case Type</label>
+        <select id="type-filter">
+          <option value="all">All Types</option>
+          <option value="family">Family Law</option>
+          <option value="criminal">Criminal Law</option>
+          <option value="civil">Civil Litigation</option>
+          <option value="business">Business Law</option>
+          <option value="property">Property Law</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="date-filter">Sort By</label>
+        <select id="date-filter">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="updated">Recently Updated</option>
+        </select>
+      </div>
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search cases...">
+      </div>
+    </div>
+
+    <div class="cases-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Case ID</th>
+            <th>Case Name</th>
+            <th>Type</th>
+            <th>Filed Date</th>
+            <th>Last Updated</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CT-2023-0876</td>
+            <td>Property Dispute - Miller Estate</td>
+            <td>Property Law</td>
+            <td>Jun 12, 2023</td>
+            <td>Oct 15, 2023</td>
+            <td><span class="status status-in-progress">In Progress</span></td>
+            <td>
+              <button class="action-btn"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-download"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>CT-2023-0543</td>
+            <td>Child Custody - Johnson</td>
+            <td>Family Law</td>
+            <td>Apr 28, 2023</td>
+            <td>Oct 10, 2023</td>
+            <td><span class="status status-review">Under Review</span></td>
+            <td>
+              <button class="action-btn"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-download"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>CT-2023-0987</td>
+            <td>Contract Breach - Davidson Corp</td>
+            <td>Business Law</td>
+            <td>Jul 15, 2023</td>
+            <td>Oct 05, 2023</td>
+            <td><span class="status status-open">Open</span></td>
+            <td>
+              <button class="action-btn"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-download"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>CT-2023-0234</td>
+            <td>Personal Injury - Thompson</td>
+            <td>Civil Litigation</td>
+            <td>Mar 05, 2023</td>
+            <td>Sep 28, 2023</td>
+            <td><span class="status status-resolved">Resolved</span></td>
+            <td>
+              <button class="action-btn"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-download"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>CT-2023-1123</td>
+            <td>Tenant Eviction - Riverside Properties</td>
+            <td>Property Law</td>
+            <td>Aug 20, 2023</td>
+            <td>Sep 25, 2023</td>
+            <td><span class="status status-in-progress">In Progress</span></td>
+            <td>
+              <button class="action-btn"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-download"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination">
+      <button class="active">1</button>
+      <button>2</button>
+      <button>3</button>
+      <button><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+
+  <script>
+    // Basic filtering functionality
+    document.getElementById('status-filter').addEventListener('change', filterCases);
+    document.getElementById('type-filter').addEventListener('change', filterCases);
+    document.getElementById('date-filter').addEventListener('change', sortCases);
+    
+    function filterCases() {
+      const statusFilter = document.getElementById('status-filter').value;
+      const typeFilter = document.getElementById('type-filter').value;
+      const rows = document.querySelectorAll('.cases-table tbody tr');
+      
+      rows.forEach(row => {
+        const status = row.querySelector('.status').classList[1];
+        const type = row.cells[2].textContent;
+        
+        const statusMatch = statusFilter === 'all' || status.includes(statusFilter.replace('-', ''));
+        const typeMatch = typeFilter === 'all' || type.toLowerCase().includes(typeFilter.toLowerCase());
+        
+        row.style.display = statusMatch && typeMatch ? 'table-row' : 'none';
+      });
+    }
+    
+    function sortCases() {
+      const sortBy = document.getElementById('date-filter').value;
+      const tbody = document.querySelector('.cases-table tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      
+      rows.sort((a, b) => {
+        const dateA = new Date(a.cells[4].textContent);
+        const dateB = new Date(b.cells[4].textContent);
+        
+        if (sortBy === 'newest') return dateB - dateA;
+        if (sortBy === 'oldest') return dateA - dateB;
+        return 0;
+      });
+      
+      // Remove existing rows
+      while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+      }
+      
+      // Add sorted rows
+      rows.forEach(row => tbody.appendChild(row));
+    }
+    
+    // Pagination buttons
+    document.querySelectorAll('.pagination button').forEach(button => {
+      button.addEventListener('click', function() {
+        document.querySelectorAll('.pagination button').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
+```

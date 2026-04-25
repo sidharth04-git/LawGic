@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up | LawGic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    nav {
+      background: #fff;
+      padding: 16px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      flex-wrap: wrap;
+    }
+    
+    .logo {
+      font-size: 1.4em;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #1a3a5f;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .back-home {
+      text-decoration: none;
+      color: #1a3a5f;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .back-home:hover {
+      text-decoration: underline;
+    }
+    
+    .auth-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    
+    .auth-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 480px;
+      padding: 40px;
+    }
+    
+    .auth-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .auth-header h1 {
+      color: #1a3a5f;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    
+    .auth-header p {
+      color: #666;
+      font-size: 1rem;
+    }
+    
+    .form-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+    
+    .form-group-full {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .input-with-icon {
+      position: relative;
+    }
+    
+    .input-with-icon i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+    }
+    
+    .input-with-icon input,
+    .input-with-icon select {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+    
+    .input-with-icon input:focus,
+    .input-with-icon select:focus {
+      border-color: #1a3a5f;
+      outline: none;
+    }
+    
+    .password-strength {
+      margin-top: 8px;
+      font-size: 0.85rem;
+    }
+    
+    .strength-meter {
+      height: 5px;
+      background: #eee;
+      border-radius: 3px;
+      margin-top: 5px;
+      overflow: hidden;
+    }
+    
+    .strength-meter-fill {
+      height: 100%;
+      width: 0;
+      transition: width 0.3s;
+    }
+    
+    .terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 20px 0;
+    }
+    
+    .terms input {
+      margin-top: 4px;
+      width: 16px;
+      height: 16px;
+    }
+    
+    .terms label {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.4;
+    }
+    
+    .terms a {
+      color: #1a3a5f;
+      text-decoration: none;
+    }
+    
+    .terms a:hover {
+      text-decoration: underline;
+    }
+    
+    .auth-button {
+      width: 100%;
+      padding: 14px;
+      background: #1a3a5f;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .auth-button:hover {
+      background: #143052;
+    }
+    
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      margin: 25px 0;
+      color: #888;
+    }
+    
+    .auth-divider::before,
+    .auth-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+    }
+    
+    .auth-divider span {
+      padding: 0 15px;
+      font-size: 0.9rem;
+    }
+    
+    .social-login {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+    
+    .social-btn {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .social-btn:hover {
+      background: #f5f5f5;
+    }
+    
+    .social-btn img {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .auth-footer {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .auth-footer p {
+      color: #666;
+      font-size: 0.95rem;
+    }
+    
+    .auth-footer a {
+      color: #1a3a5f;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .auth-footer a:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 500px) {
+      .auth-card {
+        padding: 30px 20px;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .social-login {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <i class="fas fa-balance-scale"></i>
+      <span>LawGic</span>
+    </div>
+    <a href="1_index.html" class="back-home">
+      <i class="fas fa-arrow-left"></i>
+      Back to Home
+    </a>
+  </nav>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>Create Account</h1>
+        <p>Join our legal community today</p>
+      </div>
+      
+      <form id="signup-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first-name">First Name</label>
+            <div class="input-with-icon">
+              <i class="fas fa-user"></i>
+              <input type="text" id="first-name" name="first-name" placeholder="John" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <div class="input-with-icon">
+              <i class="fas fa-user"></i>
+              <input type="text" id="last-name" name="last-name" placeholder="Doe" required>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group-full">
+          <label for="email">Email Address</label>
+          <div class="input-with-icon">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        
+        <div class="form-group-full">
+          <label for="user-type">I am a</label>
+          <div class="input-with-icon">
+            <i class="fas fa-user-tag"></i>
+            <select id="user-type" name="user-type" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="client">Client</option>
+              <option value="lawyer">Lawyer</option>
+              <option value="student">Law Student</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group-full">
+          <label for="password">Password</label>
+          <div class="input-with-icon">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+          </div>
+          <div class="password-strength">
+            <span id="password-strength-text">Password strength</span>
+            <div class="strength-meter">
+              <div class="strength-meter-fill" id="strength-meter-fill"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group-full">
+          <label for="confirm-password">Confirm Password</label>
+          <div class="input-with-icon">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+          </div>
+        </div>
+        
+        <div class="terms">
+          <input type="checkbox" id="terms" required>
+          <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+        </div>
+        
+        <button type="submit" class="auth-button">Create Account</button>
+      </form>
+      
+      <div class="auth-divider">
+        <span>Or sign up with</span>
+      </div>
+      
+      <div class="social-login">
+        <button class="social-btn">
+          <i class="fab fa-google" style="color: #DB4437;"></i>
+        </button>
+        <button class="social-btn">
+          <i class="fab fa-linkedin" style="color: #0077B5;"></i>
+        </button>
+        <button class="social-btn">
+          <i class="fab fa-microsoft" style="color: #737373;"></i>
+        </button>
+      </div>
+      
+      <div class="auth-footer">
+        <p>Already have an account? <a href="login.html">Sign in here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Password strength indicator
+    const passwordInput = document.getElementById('password');
+    const strengthMeter = document.getElementById('strength-meter-fill');
+    const strengthText = document.getElementById('password-strength-text');
+    
+    passwordInput.addEventListener('input', function() {
+      const password = passwordInput.value;
+      let strength = 0;
+      
+      // Check password length
+      if (password.length >= 8) strength += 25;
+      
+      // Check for uppercase letters
+      if (/[A-Z]/.test(password)) strength += 25;
+      
+      // Check for numbers
+      if (/[0-9]/.test(password)) strength += 25;
+      
+      // Check for special characters
+      if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+      
+      // Update strength meter
+      strengthMeter.style.width = strength + '%';
+      
+      // Update text and color
+      if (strength === 0) {
+        strengthText.textContent = 'Password strength';
+        strengthMeter.style.backgroundColor = '#ddd';
+      } else if (strength < 50) {
+        strengthText.textContent = 'Weak';
+        strengthMeter.style.backgroundColor = '#e74c3c';
+      } else if (strength < 75) {
+        strengthText.textContent = 'Fair';
+        strengthMeter.style.backgroundColor = '#f39c12';
+      } else if (strength < 100) {
+        strengthText.textContent = 'Good';
+        strengthMeter.style.backgroundColor = '#3498db';
+      } else {
+        strengthText.textContent = 'Strong';
+        strengthMeter.style.backgroundColor = '#2ecc71';
+      }
+    });
+    
+    // Form submission
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const firstName = document.getElementById('first-name').value;
+      const lastName = document.getElementById('last-name').value;
+      const email = document.getElementById('email').value;
+      const userType = document.getElementById('user-type').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      
+      // Basic validation
+      if (!firstName || !lastName || !email || !userType || !password || !confirmPassword) {
+        alert('Please fill in all fields');
+        return;
+      }
+      
+      if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
+      
+      if (!document.getElementById('terms').checked) {
+        alert('Please agree to the Terms of Service and Privacy Policy');
+        return;
+      }
+      
+      // In a real application, you would send this data to your server
+      console.log('Signup attempt:', { firstName, lastName, email, userType, password });
+      
+      // Simulate successful signup
+      alert('Account created successfully! Redirecting to login...');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LawGic | Legal Tech Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* About Us Section Styles */
+    .about-us {
+      padding: 80px 5%;
+      background: white;
+    }
+    
+    .about-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .about-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .about-header h2 {
+      color: #1a3a5f;
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+    
+    .about-header p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #555;
+    }
+    
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+    
+    .about-text h3 {
+      color: #1a3a5f;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    
+    .about-text p {
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.7;
+    }
+    
+    .about-stats {
+      display: flex;
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .about-stat {
+      text-align: center;
+    }
+    
+    .about-stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1a3a5f;
+      margin-bottom: 5px;
+    }
+    
+    .about-stat-label {
+      font-size: 1rem;
+      color: #666;
+    }
+    
+    .about-image img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .value-card {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .value-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .value-icon {
+      background: #1a3a5f;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 20px;
+    }
+    
+    .value-card h4 {
+      color: #1a3a5f;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+    
+    .value-card p {
+      color: #666;
+    }
+    
+    @media (max-width: 900px) {
+      .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .about-stats {
+        justify-content: center;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .about-stats {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+    /* service setion style */
+    .services {
+  padding: 80px 5%;
+  background: #f8f9fa;
+}
+
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.services h2 {
+  color: #1a3a5f;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+.services p {
+  max-width: 700px;
+  margin: 0 auto 50px;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.service-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+  color: inherit;
+}
+
+.service-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #1a3a5f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin: 0 auto 20px;
+}
+
+.service-card h4 {
+  color: #1a3a5f;
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+.service-card p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <i class="fas fa-balance-scale"></i>
+      <span>LawGic</span>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <!-- Navigation items inserted by JS based on mode -->
+    </div>
+    <div class="mode-switcher">
+      <span>Mode:</span>
+      <div class="select-wrapper">
+        <select id="mode-select" aria-label="Select User Mode or Lawyer Mode">
+          <option value="user">User Mode</option>
+          <option value="lawyer">Lawyer Mode</option>
+        </select>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- User Mode Content -->
+    <section class="hero" id="user-mode">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="headline">
+            Overcome legal obstacles to your <span class="highlight">success!</span>
+          </h1>
+          <p class="subhead">
+            Law without obstacles for your success. Professional support to help you overcome legal difficulties and achieve your goals.
+          </p>
+          <div class="cta-container">
+            <button class="cta-btn">
+              <span>Book a free consultation</span>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="stats">
+              <div class="stat">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Cases Resolved</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">98%</span>
+                <span class="stat-label">Client Satisfaction</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="main-visual">
+            <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Legal consultation" class="hero-image" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lawyer Mode Content -->
+    <section class="lawyer-dashboard" id="lawyer-mode" hidden>
+      <div class="dashboard-header">
+        <h1>Lawyer Dashboard</h1>
+        <p>Welcome back, manage your practice efficiently</p>
+        <div class="dashboard-stats">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-content">
+              <span class="stat-number">24</span>
+              <span class="stat-label">Active Clients</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-folder-open"></i>
+            </div>
+            <div class="stat-content">
+              <span class="stat-number">18</span>
+              <span class="stat-label">Open Cases</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="stat-content">
+              <span class="stat-number">7</span>
+              <span class="stat-label">Upcoming Meetings</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-grid">
+          <a href="#" class="action-card">
+            <div class="action-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <span>Client Database</span>
+          </a>
+          <a href="#" class="action-card">
+            <div class="action-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <span>Case Management</span>
+          </a>
+          <a href="#" class="action-card">
+            <div class="action-icon">
+              <i class="fas fa-file-upload"></i>
+            </div>
+            <span>Document Upload</span>
+          </a>
+          <a href="#" class="action-card">
+            <div class="action-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <span>Appointments</span>
+          </a>
+          <a href="#" class="action-card">
+            <div class="action-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <span>Analytics</span>
+          </a>
+          <a href="#" class="action-card">
+            <div class="action-icon">
+              <i class="fas fa-bell"></i>
+            </div>
+            <span>Notifications</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section id="services" class="services">
+  <div class="services-container">
+    <h2>Our Services</h2>
+    <p>We provide a wide range of legal and tech-enabled services to help both users and lawyers. Explore our key offerings below:</p>
+    <div class="services-grid">
+      
+      <a href="10_finder.html" class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-gavel"></i>
+        </div>
+        <h4>LawyerConnect</h4>
+        <p>Emphasizes the connection between clients and lawyers</p>
+      </a>
+
+      <a href="8_appointment.html" class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-video"></i>
+        </div>
+        <h4>Video Consultations</h4>
+        <p>Secure video meetings with legal professionals through our integrated platform.</p>
+      </a>
+
+      <a href="3_casetracker.html" class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-balance-scale"></i>
+        </div>
+        <h4>Case Tracking</h4>
+        <p>Track the progress of your cases in real time with status updates and reminders.</p>
+      </a>
+
+      <a href="#" class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <h4>NGO & Legal Aid</h4>
+        <p>Get connected with NGOs and legal aid organizations for additional support when needed.</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+    <!-- About Us Section -->
+    <section id="about-us" class="about-us">
+      <div class="about-container">
+        
+        
+        <div class="about-content">
+          <div class="about-text">
+            <h3>Our Mission</h3>
+            <p>At LawGic, we believe that everyone deserves access to quality legal support without the traditional barriers of complexity, cost, and confusion. Our mission is to democratize legal services through technology, making them accessible, understandable, and affordable for all.</p>
+            <p>We combine cutting-edge technology with legal expertise to provide innovative solutions that help individuals and businesses navigate the legal landscape with confidence.</p>
+            
+            <div class="about-stats">
+              <div class="about-stat">
+                <div class="about-stat-number">500+</div>
+                <div class="about-stat-label">Cases Resolved</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-number">98%</div>
+                <div class="about-stat-label">Client Satisfaction</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-number">50+</div>
+                <div class="about-stat-label">Legal Experts</div>
+              </div>
+            </div>
+          </div>
+          <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwa90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="LawGic Mission">
+          </div>
+        </div>
+        
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon">
+              <i class="fas fa-scale-balanced"></i>
+            </div>
+            <h4>Integrity</h4>
+            <p>We uphold the highest ethical standards in all our interactions, ensuring transparency and honesty with our clients.</p>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <h4>Innovation</h4>
+            <p>We continuously seek new ways to simplify legal processes through technology, making law more accessible to everyone.</p>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon">
+              <i class="fas fa-hand-holding-heart"></i>
+            </div>
+            <h4>Client Focus</h4>
+            <p>Our clients' success is our success. We prioritize their needs and work tirelessly to achieve their legal goals.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="about-us" class="about-section" style="padding: 80px 5%; background: #f8f9fa;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <h2 style="font-size: 2.2rem; color: #1a3a5f; margin-bottom: 20px; text-align: center;">About LawGic</h2>
+    <p style="font-size: 1.1rem; color: #555; text-align: center; max-width: 800px; margin: 0 auto 30px;">
+      LawGic is transforming legal services through technology to make law accessible, 
+      understandable, and affordable for everyone. Our platform combines cutting-edge 
+      technology with legal expertise to provide innovative solutions.
+    </p>
+    <div style="text-align: center;">
+      <a href="6_aboutUs.html" style="background: #1a3a5f; color: white; padding: 12px 24px; 
+      border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 500;">
+        Learn More About Us
+      </a>
+    </div>
+  </div>
+</section>
+  </main>
+
+  <!-- Chatbot Widget - Initially Hidden -->
+  <div class="chatbot-wrapper">
+    <button class="chatbot-toggle" aria-label="Open Chatbot">
+      <i class="fas fa-robot"></i>
+    </button>
+    <div class="chatbot-panel" hidden>
+      <header class="chatbot-header">
+        <div class="chatbot-title">
+          <div class="chatbot-avatar">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div>
+            <h3>Legal Assistant</h3>
+            <span class="status">Online</span>
+          </div>
+        </div>
+        <button class="chatbot-close" aria-label="Close Chatbot">
+          <i class="fas fa-times"></i>
+        </button>
+      </header>
+      <div class="chatbot-body">
+        <div class="message bot-message">
+          <p>Hi there! I'm your legal assistant. How can I help you today?</p>
+          <span class="time">12:45 PM</span>
+        </div>
+        <div class="quick-replies">
+          <button class="quick-reply">Document Help</button>
+          <button class="quick-reply">Case Status</button>
+          <button class="quick-reply">Legal Advice</button>
+        </div>
+      </div>
+      <div class="chatbot-footer">
+        <div class="chat-input">
+          <input type="text" placeholder="Type your message here..." />
+          <button class="send-btn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Update the navigation items to include the About Us link
+    const navItems = {
+      user: [
+        { text: 'About us', href: '#about-us' }, // Updated to point to the section
+        { text: 'Chatbot', href: '#' },
+        { text: 'Document Interpreter', href: '#' },
+        { text: 'Case Tracker', href: '3_casetracker.html' },
+        { text: 'NGO Partners', href: '#' },
+        { text: 'Blogs', href: '2_blog.html' },
+        { buttonText: 'Login', href:'5_login.html' , icon: 'fas fa-sign-in-alt' },
+        { buttonText: 'Sign Up', href: '5_signup.html', icon: 'fas fa-user-plus' },
+      ],
+      lawyer: [
+        { text: 'Dashboard', href: '#' },
+        { text: 'Clients', href: '#' },
+        { text: 'Cases', href: '#' },
+        { text: 'Documents', href: '#' },
+        { text: 'Calendar', href: '#' },
+        { text: 'Analytics', href: '#' },
+        { buttonText: 'Logout', icon: 'fas fa-sign-out-alt' },
+        { buttonText: 'Profile', icon: 'fas fa-user-circle' },
+      ],
+    };
+  </script>
+</body>
+</html>

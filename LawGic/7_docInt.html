@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LawGic - Document Summarizer</title>
+  <link rel="stylesheet" href="7_docInt.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">LawGic</div>
+      <ul class="navbar-links">
+        <li><a href="1_index.html">Home</a></li>
+        <li><a href="legal-cases.html">Legal Cases</a></li>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="chatbot.html">Chatbot</a></li>
+        <li><a href="summery.html" class="active">Document Interpreter</a></li>
+        <li><a href="case-tracker.html">Case Tracker</a></li>
+        <li><a href="ngo-partners.html">NGO Partners</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Effortless AI Document Summarization</h1>
+      <p class="hero-subtitle">
+        Instantly condense lengthy PDFs and DOCX files into concise summaries.<br />
+        Fast, accurate, and powered by the latest AI technology.
+      </p>
+      <a href="#upload-section" class="hero-cta">Get Started</a>
+    </div>
+  </section>
+
+  <div class="container" id="upload-section">
+
+    <div class="header">
+      <h1>Doc Summarize AI</h1>
+      <p>Intelligent Document Summarization with AI</p>
+    </div>
+
+    <div class="main-card">
+
+      <!-- API Configuration (Hidden) -->
+      <div class="settings-section" style="display:none;">
+        <div class="settings-title">⚙️ API Configuration</div>
+        <div class="settings-grid">
+          <div class="form-group">
+            <label for="aiProvider">AI Provider</label>
+            <select id="aiProvider">
+              <option value="openai">OpenAI GPT</option>
+              <option value="gemini">Google Gemini</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="apiKey">API Key</label>
+            <input type="password" id="apiKey" placeholder="AIzaSyCCuSfWJUNoMdrRno5XelNbFn-zgs-piM0" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="summaryLength">Summary Length</label>
+          <select id="summaryLength">
+            <option value="short">Short (2-3 sentences)</option>
+            <option value="medium" selected>Medium (1 paragraph)</option>
+            <option value="long">Long (2-3 paragraphs)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Upload Section -->
+      <div class="upload-section">
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-icon">📄</div>
+          <h3 class="upload-title">Drop your document here</h3>
+          <p class="upload-subtitle">or click to browse files</p>
+          <p class="upload-formats">Supports PDF and DOCX files</p>
+          <input type="file" id="fileInput" accept=".pdf,.docx" style="display:none" />
+        </div>
+      </div>
+
+      <!-- File Info -->
+      <div id="fileInfo" class="file-info" style="display:none;">
+        <div class="file-card">
+          <span class="file-icon">📄</span>
+          <div class="file-details">
+            <div id="fileName" class="file-name"></div>
+            <div id="fileSize" class="file-size"></div>
+          </div>
+          <button id="removeFile" class="remove-file" title="Remove file">×</button>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <div class="action-section">
+        <button id="summarizeBtn" class="summarize-btn" disabled>
+          <span class="btn-text">Summarize Document</span>
+          <span class="btn-loader" style="display:none;">⏳ Processing...</span>
+        </button>
+      </div>
+
+      <!-- Results Section -->
+      <div id="resultsSection" class="results-section" style="display:none;">
+        <h3 class="results-title">📋 Document Summary</h3>
+        <div class="summary-card">
+          <div id="summaryContent" class="summary-content"></div>
+          <div class="summary-actions">
+            <button id="copyBtn" class="action-btn">📋 Copy</button>
+            <button id="downloadBtn" class="action-btn">💾 Download</button>
+            <button id="listenBtn" class="action-btn">🔊 Listen</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status Message -->
+      <div id="statusMessage" class="status-message" style="display:none;"></div>
+
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2025 LawGic - Powered by OpenAI & Google Gemini</p>
+  </footer>
+
+  <script src="7_docInt.js"></script>
+
+  <script>
+    document.querySelector(".hero-cta").addEventListener("click", (e) => {
+      e.preventDefault();
+      document.getElementById("upload-section").scrollIntoView({ behavior: "smooth" });
+    });
+  </script>
+
+</body>
+</html>

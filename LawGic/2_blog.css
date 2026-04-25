@@ -1,0 +1,118 @@
+/* blogs.css */
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f8f9fa;
+  color: #333;
+  margin: 0;
+}
+
+nav {
+  background: #fff;
+  padding: 16px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.4em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #1a3a5f;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1em;
+  padding: 6px 10px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #1a3a5f;
+}
+
+.nav-links a.active {
+  font-weight: 700;
+  color: #1a3a5f;
+  border-bottom: 3px solid #1a3a5f;
+  padding-bottom: 4px;
+}
+
+.blogs-container {
+  max-width: 960px;
+  margin: 40px auto 80px auto;
+  padding: 0 5%;
+  color: #333;
+}
+
+.blogs-container h1 {
+  font-size: 2.8em;
+  margin-bottom: 30px;
+  font-weight: 700;
+  color: #1a3a5f;
+}
+
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 36px;
+}
+
+.blog-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 4px solid #1a3a5f;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.blog-title {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #1a3a5f;
+  margin-bottom: 12px;
+}
+
+.blog-excerpt {
+  font-size: 1em;
+  color: #555;
+  flex-grow: 1;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.read-more {
+  align-self: flex-start;
+  font-weight: 600;
+  color: #1a3a5f;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+  padding: 4px 0;
+}
+
+.read-more:hover {
+  border-color: #1a3a5f;
+}

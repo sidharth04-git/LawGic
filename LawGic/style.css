@@ -1,0 +1,224 @@
+/* Reset and base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f7fa;
+  color: #222;
+  transition: background 0.3s, color 0.3s;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #1f3c88, #21c8f6);
+  padding: 1rem 2rem;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.nav-links a {
+  margin: 0 1rem;
+  font-weight: bold;
+}
+.nav-links a:hover {
+  color: #ffeb3b;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s;
+}
+.btn:hover {
+  transform: scale(1.05);
+}
+.primary {
+  background: #1f3c88;
+  color: white;
+}
+.accent {
+  background: #ff5722;
+  color: white;
+}
+.outline {
+  border: 2px solid #1f3c88;
+  background: transparent;
+  color: #1f3c88;
+}
+
+/* Hero */
+.hero {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #1f3c88, #21c8f6);
+  color: white;
+  text-align: center;
+}
+
+/* Sections */
+.section {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.card i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #1f3c88;
+}
+
+/* Chatbot */
+.chatbot {
+  margin-top: 2rem;
+  background: #fff;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin-inline: auto;
+}
+.chat-log {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+.chat-log .bot {
+  background: #e3f2fd;
+  padding: 0.5rem;
+  border-radius: 10px;
+  margin: 0.5rem 0;
+}
+.chat-input {
+  display: flex;
+  gap: 0.5rem;
+}
+.chat-input input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+}
+.chat-input button {
+  background: #1f3c88;
+  color: white;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  min-width: 300px;
+  position: relative;
+}
+.modal-content input {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.modal-content .close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Dark Mode */
+.dark-mode {
+  background: #121212;
+  color: #f1f1f1;
+}
+.dark-mode .navbar {
+  background: #1e1e1e;
+}
+.dark-mode .card {
+  background: #1e1e1e;
+  color: white;
+}
+.dark-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 100;
+}
+/* Chatbot Language Selector */
+#langSelect {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Case Tracking Section */
+#case-tracking .grid .card {
+  background: #e3f2fd;
+  border-left: 4px solid #1f3c88;
+}
+
+/* Document Summarizer */
+#doc-summary textarea {
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  resize: vertical;
+  font-size: 1rem;
+}
+#doc-summary select {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 1rem;
+}
+

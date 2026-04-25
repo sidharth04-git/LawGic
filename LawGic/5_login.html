@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login | LawGic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Additional styles specific to login page */
+    .auth-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    
+    .auth-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 440px;
+      padding: 40px;
+    }
+    
+    .auth-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .auth-header h1 {
+      color: #1a3a5f;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    
+    .auth-header p {
+      color: #666;
+      font-size: 1rem;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .input-with-icon {
+      position: relative;
+    }
+    
+    .input-with-icon i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+    }
+    
+    .input-with-icon input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    
+    .input-with-icon input:focus {
+      border-color: #1a3a5f;
+      outline: none;
+    }
+    
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .remember input {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .forgot-password {
+      color: #1a3a5f;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+    
+    .auth-button {
+      width: 100%;
+      padding: 14px;
+      background: #1a3a5f;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .auth-button:hover {
+      background: #143052;
+    }
+    
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      margin: 25px 0;
+      color: #888;
+    }
+    
+    .auth-divider::before,
+    .auth-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+    }
+    
+    .auth-divider span {
+      padding: 0 15px;
+      font-size: 0.9rem;
+    }
+    
+    .social-login {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+    
+    .social-btn {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .social-btn:hover {
+      background: #f5f5f5;
+    }
+    
+    .auth-footer {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .auth-footer p {
+      color: #666;
+      font-size: 0.95rem;
+    }
+    
+    .auth-footer a {
+      color: #1a3a5f;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .auth-footer a:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 500px) {
+      .auth-card {
+        padding: 30px 20px;
+      }
+      
+      .social-login {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <i class="fas fa-balance-scale"></i>
+      <span>LawGic</span>
+    </div>
+    <div class="nav-links">
+      <a href="1_index.html" class="back-home">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+      </a>
+    </div>
+  </nav>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>Welcome Back</h1>
+        <p>Sign in to access your legal resources</p>
+      </div>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-with-icon">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-with-icon">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+          </div>
+        </div>
+        
+        <div class="remember-forgot">
+          <div class="remember">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember me</label>
+          </div>
+          <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+        
+        <button type="submit" class="auth-button">Sign In</button>
+      </form>
+      
+      <div class="auth-divider">
+        <span>Or continue with</span>
+      </div>
+      
+      <div class="social-login">
+        <button class="social-btn">
+          <i class="fab fa-google" style="color: #DB4437;"></i>
+        </button>
+        <button class="social-btn">
+          <i class="fab fa-linkedin" style="color: #0077B5;"></i>
+        </button>
+        <button class="social-btn">
+          <i class="fab fa-microsoft" style="color: #737373;"></i>
+        </button>
+      </div>
+      
+      <div class="auth-footer">
+        <p>Don't have an account? <a href="signup.html">Sign up now</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Login form handling
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      // Basic validation
+      if (!email || !password) {
+        alert('Please fill in all fields');
+        return;
+      }
+      
+      // In a real application, you would send this data to your server
+      console.log('Login attempt:', { email, password });
+      
+      // Simulate successful login
+      alert('Login successful! Redirecting...');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

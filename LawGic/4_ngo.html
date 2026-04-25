@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Our NGO Partners</title>
+<style>
+    :root {
+        --primary-color: #0077b6;
+        --secondary-color: #90e0ef;
+        --background-color: #e0f7fa;
+        --text-color: #023047;
+        --border-radius: 10px;
+        --box-shadow: 0 4px 15px rgba(0, 119, 182, 0.2);
+    }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--background-color);
+        margin: 40px;
+        color: var(--text-color);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    .container {
+        max-width: 700px;
+        background: white;
+        padding: 30px 40px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        text-align: center;
+    }
+    h1 {
+        color: var(--primary-color);
+        margin-bottom: 30px;
+        font-weight: 700;
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+        user-select: none;
+    }
+    label {
+        display: inline-block;
+        width: 140px;
+        text-align: right;
+        margin-right: 15px;
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--primary-color);
+    }
+    select {
+        width: 240px;
+        padding: 8px 12px;
+        font-size: 1rem;
+        border: 2px solid var(--secondary-color);
+        border-radius: var(--border-radius);
+        background-color: #ffffff;
+        color: var(--text-color);
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+    select:focus {
+        border-color: #00b4d8;
+        outline: none;
+        box-shadow: 0 0 8px rgba(0, 180, 216, 0.4);
+    }
+    .form-row {
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .ngo-details {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        background: #f9f9f9;
+        text-align: left;
+    }
+    .ngo-details h3 {
+        margin: 5px 0;
+        color: var(--primary-color);
+    }
+    .ngo-details p {
+        margin: 3px 0;
+    }
+    a {
+        color: #0077b6;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+<div class="container" role="main">
+    <h1>OUR NGO PARTNERS</h1>
+    <div class="form-row">
+        <label for="state">Select State:</label>
+        <select id="state" name="state" aria-label="Select State">
+            <option value="">--Select State--</option>
+            <option value="andhra-pradesh">Andhra Pradesh</option>
+            <option value="arunachal-pradesh">Arunachal Pradesh</option>
+            <option value="assam">Assam</option>
+            <option value="bihar">Bihar</option>
+            <option value="uttar-pradesh">Uttar Pradesh</option>
+            <option value="uttarakhand">Uttarakhand</option>
+            <option value="chandigarh">Chandigarh</option>
+            <option value="chhattisgarh">Chhattisgarh</option>
+            <option value="punjab">Punjab</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="district">Select District:</label>
+        <select id="district" name="district" disabled aria-label="Select District">
+            <option value="">--Select District--</option>
+        </select>
+    </div>
+    <div class="form-row" id="ngo-row" style="display:none;">
+        <label for="ngo">Select NGO:</label>
+        <select id="ngo" name="ngo" aria-label="Select NGO">
+            <option value="">--Select NGO--</option>
+        </select>
+    </div>
+    <div id="ngo-details" class="ngo-details" style="display:none;"></div>
+</div>
+<script>
+const stateDistrictMap = {
+    "andhra-pradesh": ["Visakhapatnam", "Kurnool", "Ananthapuramu", "Chittoor", "Prakasam", "Eluru"],
+    "arunachal-pradesh": ["Tawang","West Kameng","Namsai","Dibang Valley","East Siang","Lower Dibang Valley","Upper Subansiri"],
+    "assam": ["Barpeta","Dhemaji","Dhubri","Dibrugarh","Jorhat","Lakhimpur","Marigaon","Nalbari","Sonitpur","Tinsukia"],
+    "bihar": ["Patna","Gaya"],
+    "uttar-pradesh": ["Agra", "Lucknow", "Varanasi", "Kanpur", "Ghaziabad", "Meerut"],
+    "uttarakhand": ["Almora", "Bageshwar", "Chamoli", "Champawat", "Pauri Garhwal", "Pithoragarh", "Rudraprayag", "Tehri Garhwal", "Uttarkashi"],
+    "chandigarh": ["Chandigarh"],
+    "chhattisgarh": ["Raipur", "Bhilai", "Bilaspur", "Jagdalpur", "Durg", "Korba", "Raigarh"],
+    "punjab": ["Amritsar", "Ludhiana", "Jalandhar", "Patiala", "Bathinda", "Mohali"]
+};
+// Andhra NGOs
+const ngosAndhra = [
+    { name: "🐍 Snake Cell Andhra Pradesh", focus: "Reptile conservation, snake rescue, wildlife crime control", website: "http://snakecell.in", location: "Hyderabad", founded: "2009" },
+    { name: "🌊 Dolphin Nature Conservation Society (DNCS)", focus: "Nature conservation, education, awareness", website: "Not listed", location: "Visakhapatnam", founded: "2001" },
+    { name: "🧠 Think Peace", focus: "Development aid in tribal regions", website: "http://thinkpeace.in", location: "Hyderabad" },
+    { name: "🍽️ Akshaya Patra Foundation", focus: "Mid-day meal programs", website: "http://andhrapradesh.akshayapatra.org", location: "Visakhapatnam" },
+    { name: "🌱 Rural Development Trust (RDT)", focus: "Rural development, education, health", website: "http://rdtfvf.org", location: "Ananthapuramu" },
+    { name: "💡 SERUDS", focus: "Support for children, elderly, women", website: "http://serudsindia.org", location: "Kurnool" }
+];
+
+// Arunachal NGOs
+const ngosArunachal = [
+    { name: "🗣️ Tani Language Foundation (TLF)", focus: "Preservation of Tani languages", website: "http://tanilanguagefoundation.org", location: "Arunachal Pradesh & Assam", founded: "2024", founder: "Luke Mingkeng Lego" },
+    { name: "🏞️ Keba Kera Society", focus: "Community development", website: "Not listed", location: "Anini, Dibang Valley" },
+    { name: "📚 Arunachal Pali Vidyapith", focus: "Education and literacy", website: "Not listed", location: "Chongkham, Namsai" },
+    { name: "🌿 Tai Khampti Development Society", focus: "Cultural and socio-economic development", website: "Not listed", location: "Namsai" },
+    { name: "🧘 Serajey Jamyongchoekhorling Buddhist Culture Preservation Society", focus: "Preservation of Buddhist culture", website: "https://indiangoslist.com/ngo-address/serajey-jamyongchoekhorling-buddhist-culture-preservation-society-in-tawang-arunachal-pradesh_AR-2011-0041838", location: "Tawang" },
+    { name: "🌱 Youth Action For Social Welfare", focus: "Social welfare initiatives", website: "https://indiangoslist.com/ngo-address/youth-action-for-social-welfare-in-tawang-arunachal-pradesh_AR-2011-0039801", location: "Tawang" },
+    { name: "🏫 Abo Tani Educational and Cultural Society", focus: "Education, cultural preservation", website: "Not listed", location: "Daporijo, Upper Subansiri" },
+    { name: "🌍 Adi Baane Kebang Youth Wing (ABKYW)", focus: "Youth empowerment & cultural preservation", website: "http://abkyw.com", location: "Pasighat, East Siang" },
+    { name: "🌄 AMYAA", focus: "Adventure sports, youth development", website: "http://amyaa.org", location: "Roing, Lower Dibang Valley" },
+    { name: "🏥 Essomi Foundation Trust", focus: "Education & community development", website: "Not listed", location: "Roing, Lower Dibang Valley" },
+    { name: "🎓 Goolong Sisong Educational Society", focus: "Education & social welfare", website: "Not listed", location: "Roing, Lower Dibang Valley" },
+    { name: "🌟 Modern Dream", focus: "Youth development", website: "Not listed", location: "Roing, Lower Dibang Valley" },
+    { name: "🛡️ SWMPO", focus: "Social welfare & development", website: "Not listed", location: "Roing, Lower Dibang Valley" }
+];
+
+// Assam NGOs
+const ngosAssam = [
+    { name: "🏢 Centre for North East Studies and Policy Research (C-NES)", focus: "Community development, education, and health", website: "http://c-nes.org", location: "New Delhi", areas: "Barpeta, Dhemaji, Dhubri, Dibrugarh, Jorhat, Lakhimpur, Marigaon, Nalbari, Sonitpur, Tinsukia" },
+    { name: "🌍 Earth Care Foundation", focus: "Education, health, environment, rural development", website: "http://earthcarefoundation.com", location: "New Delhi", areas: "Assam, Arunachal Pradesh, Bihar, and more" },
+    { name: "🙏 Buddh Jyoti Foundation", focus: "Education, health, and social welfare", website: "http://buddhjyoti.org", location: "New Delhi", areas: "Assam, Arunachal Pradesh, Bihar, and more" },
+    { name: "📖 Aryan Foundation for Research and Action", focus: "Social research and development", website: "http://aryan.org.in", location: "New Delhi", areas: "Assam, Arunachal Pradesh, Bihar, and more" },
+    { name: "🎓 Eduheal Foundation", focus: "Education, health, and scientific research", website: "http://eduhealfoundation.com", location: "New Delhi", areas: "Assam, Arunachal Pradesh, Bihar, and more" },
+    { name: "💪 Dhriiti The Courage Within", focus: "Entrepreneurship and youth empowerment", website: "http://dhriiti.org", location: "New Delhi", areas: "Assam, Delhi, Jharkhand" },
+    { name: "🤝 Federation of Muslim Organizations", focus: "Education, human rights, minority issues", website: "Not listed", location: "Delhi", areas: "Assam, Arunachal Pradesh, Bihar, and more" },
+    { name: "🗳️ All India Sonia Gandhi Vichar Manch", focus: "Education, health, rural development", website: "http://allindiasoniagandhivicharmanch.com", location: "Delhi", areas: "Assam, Arunachal Pradesh, Bihar, and more" }
+];
+
+// Bihar NGOs
+const ngosBihar = [
+    { name: "🌱 Aadarsh Vikalp", focus: "Education & Social Development", website: "http://www.aadarshvikalp.org", location: "Bihar" },
+    { name: "🌍 Earth Care Foundation", focus: "Environment, Education, Rural Development", website: "http://www.earthcarefoundation.com", location: "New Delhi", areas: "Bihar, Assam, Arunachal Pradesh, and more" },
+    { name: "🤝 Anubhuti Foundation Mission", focus: "Community Development, Education, Health", website: "http://www.anubhutifoundation.org", location: "Bihar" },
+    { name: "💡 AAS Welfare Foundation", focus: "Health & Social Welfare", website: "http://aasfoundation.org", location: "Bihar" }
+];
+
+// Uttar Pradesh NGOs
+const ngosUttarPradesh = [
+    { name: "ISU (Institute of Social Upliftment)", focus: "Basic education for street children and environmental awareness", website: "http://www.isu.org.in/", location: "Uttar Pradesh" },
+    { name: "Ismat Foundation", focus: "Community welfare and education", website: "Not listed", location: "Uttar Pradesh" },
+    { name: "Islamic Relief India", focus: "Health camps, women empowerment, disaster relief", website: "http://www.islamic-relief.org.in/", location: "Uttar Pradesh" },
+    { name: "International Trade Development Centre", focus: "International trade counseling and awareness", website: "http://www.tradecouncil.org/", location: "Uttar Pradesh" },
+    { name: "International Society for Small and Medium Enterprises (ISSME)", focus: "Promotion of SMEs", website: "https://www.issme.org/", location: "Uttar Pradesh" },
+    { name: "International Promoters Council", focus: "Business and trade promotion", website: "Not listed", location: "Uttar Pradesh" },
+    { name: "International Institute of Health Management Research (IIHMR)", focus: "Health management education and consultancy", website: "http://www.iihmr.org/", location: "Uttar Pradesh" },
+    { name: "International Human Rights Council (IHRC)", focus: "Human rights defense", website: "https://ihrc.in/", location: "Uttar Pradesh" }
+];
+
+const ngosUttarakhand = [
+    {
+        name: "Foundation Shurwaat",
+        focus: "Aged/Elderly, Agriculture, Children, Civic Issues, Disaster Management, Education & Literacy, Environment & Forests, Food Processing, Health & Family Welfare, Legal Awareness & Aid, Labour & Employment, Micro Small & Medium Enterprises, Right to Information & Advocacy, Rural Development & Poverty Alleviation, Scientific & Industrial Research, Tourism, Vocational Training, Women’s Development & Empowerment",
+        website: "http://www.foundationshurwaat.org",
+        location: "Almora, Bageshwar, Chamoli, Champawat, Pauri Garhwal, Pithoragarh, Rudraprayag, Tehri Garhwal, Uttarkashi"
+    },
+    {
+        name: "Ambuja Foundation",
+        focus: "Livelihood support, agriculture, water, health, women and education programs",
+        website: "https://www.ambujafoundation.org/",
+        location: "Uttarakhand"
+    },
+    {
+        name: "Lok Chetna Vikas Samiti",
+        focus: "Community development",
+        website: "https://www.lcvsngo.com/",
+        location: "Almora"
+    }
+];
+const ngosChandigarh = [
+    {
+        name: "Apang Sewa Sanstha",
+        focus: "Art & Culture, Children, Differently Abled, Women’s Development & Empowerment, Any Other",
+        website: "http://www.apang.org",
+        location: "Chandigarh, Delhi, Haryana, Himachal Pradesh, Punjab, Rajasthan"
+    },
+    {
+        name: "ARRIVESAFE",
+        focus: "Safety awareness and training",
+        website: "http://www.arrivesafe.org",
+        location: "Chandigarh"
+    },
+    {
+        name: "Baba Nanak Educational Society",
+        focus: "Educational development",
+        website: "http://bnespunjab.org",
+        location: "Chandigarh"
+    },
+    {
+        name: "Anandini",
+        focus: "Social development",
+        website: "http://www.anandini.org",
+        location: "Chandigarh"
+    },
+    {
+        name: "ACT TO RISE FOR INNOVATION IN SPECIAL EDUCATION",
+        focus: "Special education",
+        website: "http://arise4socialcause.webs.com",
+        location: "Chandigarh"
+    }
+];
+const ngosChhattisgarh = [
+    {
+        name: "International Society for Small and Medium Enterprises",
+        focus: "Promotion of Small and Medium Enterprises",
+        website: "https://www.issme.org/",
+        location: "Chhattisgarh"
+    },
+    {
+        name: "International Institute of Health Management Research",
+        focus: "Health management education and consultancy",
+        website: "https://www.iihmr.org/",
+        location: "Chhattisgarh"
+    },
+    {
+        name: "International Human Rights Council",
+        focus: "Human rights defense",
+        website: "https://ihrc.in/about/",
+        location: "Chhattisgarh"
+    },
+    {
+        name: "Intellectual Foundation",
+        focus: "Unknown - Possibly related to World Intellectual Foundation",
+        website: "http://www.worldintellectual.foundation/",
+        location: "Chhattisgarh"
+    },
+    {
+        name: "Intellect Global Foundation Trust",
+        focus: "Website details not found",
+        website: "Not listed",
+        location: "Chhattisgarh"
+    },
+    {
+        name: "INTACH (Indian National Trust for Art and Cultural Heritage)",
+        focus: "Art and cultural heritage preservation",
+        website: "https://intach.org",
+        location: "Chhattisgarh"
+    },
+    {
+        name: "Institute of Management Training",
+        focus: "Management training programs",
+        website: "https://managementtraininginstitute.com",
+        location: "Chhattisgarh"
+    },
+    {
+        name: "The Institute for Narcotics Studies and Analysis",
+        focus: "Research and analysis on narcotics",
+        website: "https://narcoinsa.in",
+        location: "Chhattisgarh"
+    }
+];
+
+const ngosPunjab = [
+    {
+        name: "International Society for Small and Medium Enterprises",
+        focus: "Promotion of Small and Medium Enterprises",
+        website: "https://www.issme.org/",
+        location: "Punjab"
+    },
+    {
+        name: "International Promoters Council",
+        focus: "Business and trade promotion",
+        website: "Not listed",
+        location: "Punjab"
+    },
+    {
+        name: "International Institute of Health Management Research",
+        focus: "Health management education and consultancy",
+        website: "https://www.iihmr.org/",
+        location: "Punjab"
+    },
+    {
+        name: "International Human Rights Council",
+        focus: "Human rights defense",
+        website: "https://ihrc.in/about/",
+        location: "Punjab"
+    },
+    {
+        name: "Interfaith Coalition for Peace",
+        focus: "Peace and interfaith efforts",
+        website: "http://icpindia.org",
+        location: "Punjab"
+    },
+    {
+        name: "Intellectual Foundation",
+        focus: "Possibly related to World Intellectual Foundation",
+        website: "http://www.worldintellectual.foundation/",
+        location: "Punjab"
+    },
+    {
+        name: "INTACH (Indian National Trust for Art and Cultural Heritage)",
+        focus: "Art and cultural heritage preservation",
+        website: "https://www.intach.org",
+        location: "Punjab"
+    },
+    {
+        name: "Institute of Public Auditors of India",
+        focus: "Auditing and public accountability",
+        website: "https://ipaiindia.org",
+        location: "Punjab"
+    },
+    {
+        name: "Institute of Management Training",
+        focus: "Management training programs",
+        website: "https://managementtraininginstitute.com",
+        location: "Punjab"
+    },
+    {
+        name: "The Institute for Narcotics Studies and Analysis",
+        focus: "Research and analysis on narcotics",
+        website: "https://narcoinsa.in",
+        location: "Punjab"
+    },
+    {
+        name: "Punjab State Human Rights Commission",
+        focus: "Human rights protection",
+        website: "https://www.pshrc.net/",
+        location: "Punjab"
+    }
+];
+
+const stateSelect = document.getElementById('state');
+const districtSelect = document.getElementById('district');
+const ngoRow = document.getElementById('ngo-row');
+const ngoSelect = document.getElementById('ngo');
+const ngoDetails = document.getElementById('ngo-details');
+
+stateSelect.addEventListener('change', () => {
+    const selectedState = stateSelect.value;
+    districtSelect.innerHTML = '<option value="">--Select District--</option>';
+    districtSelect.disabled = true;
+    ngoRow.style.display = "none";
+    ngoDetails.style.display = "none";
+
+    if (selectedState && stateDistrictMap[selectedState]) {
+        stateDistrictMap[selectedState].forEach(district => {
+            const option = document.createElement('option');
+            option.value = district.toLowerCase().replace(/ /g, '-');
+            option.textContent = district;
+            districtSelect.appendChild(option);
+        });
+        districtSelect.disabled = false;
+
+        let ngoList = [];
+        if (selectedState === "andhra-pradesh") ngoList = ngosAndhra;
+        else if (selectedState === "arunachal-pradesh") ngoList = ngosArunachal;
+        else if (selectedState === "assam") ngoList = ngosAssam;
+        else if (selectedState === "bihar") ngoList = ngosBihar;
+        else if (selectedState === "uttar-pradesh") ngoList = ngosUttarPradesh;
+        else if (selectedState === "uttarakhand") ngoList = ngosUttarakhand;
+        else if (selectedState === "chandigarh") ngoList = ngosChandigarh;
+        else if (selectedState === "chhattisgarh") ngoList = ngosChhattisgarh;
+        else if (selectedState === "punjab") ngoList = ngosPunjab;
+
+        if (ngoList.length > 0) {
+            ngoRow.style.display = "flex";
+            ngoSelect.innerHTML = '<option value="">--Select NGO--</option>';
+            ngoList.forEach((ngo, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = ngo.name;
+                ngoSelect.appendChild(option);
+            });
+            ngoSelect.dataset.state = selectedState;
+        }
+    }
+});
+
+ngoSelect.addEventListener('change', () => {
+    const selectedIndex = ngoSelect.value;
+    const selectedState = ngoSelect.dataset.state;
+    let ngoList = [];
+
+    if (selectedState === "andhra-pradesh") ngoList = ngosAndhra;
+    else if (selectedState === "arunachal-pradesh") ngoList = ngosArunachal;
+    else if (selectedState === "assam") ngoList = ngosAssam;
+    else if (selectedState === "bihar") ngoList = ngosBihar;
+    else if (selectedState === "uttar-pradesh") ngoList = ngosUttarPradesh;
+    else if (selectedState === "uttarakhand") ngoList = ngosUttarakhand;
+    else if (selectedState === "chandigarh") ngoList = ngosChandigarh;
+    else if (selectedState === "chhattisgarh") ngoList = ngosChhattisgarh;
+    else if (selectedState === "punjab") ngoList = ngosPunjab;
+
+    if (selectedIndex !== "" && ngoList[selectedIndex]) {
+        const ngo = ngoList[selectedIndex];
+        ngoDetails.innerHTML = `
+            <h3>${ngo.name}</h3>
+            <p><strong>Focus:</strong> ${ngo.focus}</p>
+            <p><strong>Website:</strong> ${ngo.website !== "Not listed" ? `<a href="${ngo.website}" target="_blank" rel="noopener noreferrer">${ngo.website}</a>` : "Not listed"}</p>
+            <p><strong>Location:</strong> ${ngo.location}</p>
+        `;
+        ngoDetails.style.display = "block";
+    } else {
+        ngoDetails.style.display = "none";
+    }
+});
+</script>
+</body>
+</html>
